@@ -1,0 +1,10 @@
+__pycache__/
+CODA/
+CODA-LM/
+test/
+val/
+*.zip
+*.json
+*.ipynb
+.txt
+!few_shot/**/*.json
