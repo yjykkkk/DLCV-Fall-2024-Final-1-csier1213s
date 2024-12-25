@@ -29,7 +29,6 @@ bash train.sh
 the checkpoint will be saved in "./LLaVA/checkpoints/llava-v1.5-7b-task-lora/"
 
 # Preprocess
-## merge json file
 
 ## object detection & depth estimation
 ### environment setup
@@ -65,3 +64,23 @@ mv depth_anything_v2_metric_hypersim_vitl.pth ./Depth_Anything_V2/
 python3 preprocess.py
 ```
 ## RAG
+#### Environment setup
+```
+pip install faiss
+cd rag
+```
+#### Generate RAG results (only id)
+```
+python3 faiss_id_results.py
+```
+#### Generate RAG results with gt and example outputs
+```
+python3 js_rag_full.py
+```
+## merge json file
+Combine RAG results and object detection information and depth estimation text
+```
+python3 js_combine_rag_detect.py -s test -q all -r cos -d median -v 3
+cd ..
+```
+After finishing all these preprocess steps, you can finally get the same test prompt json as the one we uploaded (dataset/test/combined_prompt_v3_test_all_cos_median.json)
