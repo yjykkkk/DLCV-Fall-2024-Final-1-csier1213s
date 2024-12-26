@@ -39,7 +39,7 @@ cd ../..
 ```bash 
 bash inference.sh $1
 ```
-$1: specified GPU id
+$1: specified GPU id  
 the predicted json file will be saved in "./output.json"
 
 # Train
