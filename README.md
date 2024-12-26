@@ -6,6 +6,7 @@ conda create -n llava python=3.10 -y
 conda activate llava
 pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
+pip install datasets
 pip install -e ".[train]"
 pip install flash-attn --no-build-isolation
 cd ..
@@ -26,6 +27,9 @@ bash inference.sh
 the predicted json file will be saved in "./output.json"
 
 # Train
+## download dataset
+save training images in "./dataset/train/images"
+## run training code
 ```
 bash train.sh 
 ```
