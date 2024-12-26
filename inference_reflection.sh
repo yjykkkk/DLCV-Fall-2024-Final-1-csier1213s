@@ -1,6 +1,6 @@
 #!/bin/bash
 
-python3 inference_reflection.py \
+python3 ./LLaVA/inference_reflection.py \
     --lora_model ./LLaVA/checkpoints/llava-v1.5-7b-task-lora \
     --image_path ./dataset/test/images \
     --query_json ./dataset/test/combined_prompt_v9_test_all_cos_median.json \
