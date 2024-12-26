@@ -44,16 +44,6 @@ the checkpoint will be saved in "./LLaVA/checkpoints/llava-v1.5-7b-task-lora/"
 
 ## object detection & depth estimation
 ### environment setup
-Make sure the environment variable `CUDA_HOME` is set.
-```bash
-echo $CUDA_HOME
-```
-If it print nothing, then it means you haven't set up the path/
-
-Run this so the environment variable will be set under current shell. 
-```bash
-export CUDA_HOME=/path/to/cuda-[your_version]
-```
 Install packages:
 ```bash
 cd GroundingDINO/
