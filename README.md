@@ -59,9 +59,10 @@ Depth-Anything-v2:
 wget https://huggingface.co/depth-anything/Depth-Anything-V2-Metric-Hypersim-Large/resolve/main/depth_anything_v2_metric_hypersim_vitl.pth
 mv depth_anything_v2_metric_hypersim_vitl.pth ./Depth_Anything_V2/
 ```
-### run preprocess code
+### generate detection and depth results
+generate detection_depth_info/test_B4_median_int.json
 ```bash
-python3 preprocess.py
+python3 preprocess.py --split test
 ```
 ## RAG
 #### Environment setup
