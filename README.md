@@ -46,8 +46,10 @@ pip install numpy==1.26.4
 ```
 ## download dataset
 ```
-mkdir dataset/train/images
+mkdir -p dataset/train/images
+mkdir -p dataset/val/images
 python3 download_dataset_image.py --split train
+python3 download_dataset_image.py --split val
 ```
 the training images will be saved in "./dataset/train/images/"
 ## run training code
