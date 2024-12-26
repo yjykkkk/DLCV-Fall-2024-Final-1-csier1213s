@@ -6,8 +6,24 @@ conda create -n llava python=3.10 -y
 conda activate llava
 pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
+pip install -e ".[train]"
+pip install flash-attn --no-build-isolation
+
+pip uninstall torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2
+conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=12.1 -c pytorch -c nvidia
+pip install flash-attn --no-build-isolation
+
 pip install datasets
 pip install gdown
+#pip install accelerate==0.28.0
+pip install peft==0.10.0
+#pip uninstall numpy
+#pip install numpy==1.26.4
+pip install --upgrade deepspeed
+pip uninstall deepspeed
+pip install deepspeed==0.12.6
+pip uninstall accelerate
+pip install accelerate==0.21.0
 cd ..
 ```
 ## download checkpoint
@@ -26,13 +42,6 @@ bash inference.sh
 the predicted json file will be saved in "./output.json"
 
 # Train
-## environment setup
-```bash
-cd LLaVA
-pip install -e ".[train]"
-pip install flash-attn --no-build-isolation
-cd ..
-```
 ## download dataset
 ```
 mkdir dataset/train/images
