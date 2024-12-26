@@ -1,2 +1,2 @@
-wget -O results/rag_all_cos.json 'https://www.dropbox.com/scl/fi/p07v3ejg0ew56fzvb0ghs/rag_all_cos.json?rlkey=x5k20qsaxlwpbtrwvvzjx1mtq&st=nno6cdvy&dl=1'
-wget -O ../dataset/reflection/combined_prompt_v9_reflection_all_cos_median.json 'https://www.dropbox.com/scl/fi/wy81zjtg1656rsy73fvws/combined_prompt_v9_reflection_all_cos_median.json?rlkey=vpbtz9hd38y65mirceghy7a64&st=dt8wjf8u&dl=1'
+wget -O rag/results/rag_all_cos.json 'https://www.dropbox.com/scl/fi/p07v3ejg0ew56fzvb0ghs/rag_all_cos.json?rlkey=x5k20qsaxlwpbtrwvvzjx1mtq&st=nno6cdvy&dl=1'
+wget -O dataset/reflection/combined_prompt_v9_reflection_all_cos_median.json 'https://www.dropbox.com/scl/fi/wy81zjtg1656rsy73fvws/combined_prompt_v9_reflection_all_cos_median.json?rlkey=vpbtz9hd38y65mirceghy7a64&st=dt8wjf8u&dl=1'
