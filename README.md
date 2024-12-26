@@ -18,7 +18,7 @@ mkdir checkpoints
 cd checkpoints/
 gdown https://drive.google.com/uc?id=1mKMK8jlDky92hySVefMn1AgPTyLUNmA1
 unzip llava-v1.5-7b-task-lora.zip
-cd ..
+cd ../..
 ```
 ## run inference code
 ```bash 
