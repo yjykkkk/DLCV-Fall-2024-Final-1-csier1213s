@@ -12,15 +12,18 @@ cd ..
 ```
 ## download checkpoint
 ```
-
+cd LLaVA/
+mkdir checkpoints
+cd checkpoints/
+gdown https://drive.google.com/uc?id=1mKMK8jlDky92hySVefMn1AgPTyLUNmA1
+unzip llava-v1.5-7b-task-lora.zip
+cd ..
 ```
 ## run inference code
 ```bash 
-bash inference.sh $1 $2 $3
+bash inference.sh 
 ```
-$1: Path to gt image folder
-$2: Path to annot file
-$3: Path to predicted file
+the predicted json file will be saved in "./output.json"
 
 # Train
 ```
