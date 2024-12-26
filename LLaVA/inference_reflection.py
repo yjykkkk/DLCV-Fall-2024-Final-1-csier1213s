@@ -1,5 +1,6 @@
 import argparse
 import torch
+import datasets
 
 from llava.constants import (
     IMAGE_TOKEN_INDEX,
@@ -86,6 +87,11 @@ def eval_model(args):
     # load prompt json file
     with open (args.query_json, "r") as f:
         data = json.load(f)
+    # turn list of dict into dict
+    data = {d["id"]: d for d in data}
+
+    # load streaming dataset
+    dataset = datasets.load_dataset("ntudlcv/dlcv_2024_final1", split = "test", streaming = True)
     
     # create output directory
     os.makedirs(os.path.dirname(args.output_path), exist_ok=True)
@@ -100,7 +106,7 @@ def eval_model(args):
         data = data[:num_data] + data[300:300+num_data] + data[600:600+num_data]
 
     # inference decode function
-    def inference_decode(image_file, qs):
+    def inference_decode(image, qs):
 
         image_token_se = DEFAULT_IM_START_TOKEN + DEFAULT_IMAGE_TOKEN + DEFAULT_IM_END_TOKEN
         if IMAGE_PLACEHOLDER in qs:
@@ -119,8 +125,7 @@ def eval_model(args):
         conv.append_message(conv.roles[1], None)
         prompt = conv.get_prompt()
 
-        image_files = image_parser(image_file)
-        images = load_images(image_files)
+        images = [image]
         image_sizes = [x.size for x in images]
         images_tensor = process_images(
             images,
@@ -159,11 +164,11 @@ def eval_model(args):
     # Inference Test_general_ first because suggestion needs the general output
 
     # iterate through all the images
-    for d in tqdm(data):
+    for item in tqdm(dataset, total=900):
 
-        # image file
-        image_file = os.path.join(args.image_path, d["image"])
-        id = d["id"]
+        # get id and image
+        id = item["id"]
+        d = data[id]
 
         # determine type of the prompt
         type = None
@@ -179,7 +184,8 @@ def eval_model(args):
         qs = d["conversations"][0]["value"][8:]
 
         # generate output
-        outputs = inference_decode(image_file, qs)
+        image = item['image']
+        outputs = inference_decode(image, qs)
         # print(f"BEFORE: \n{outputs}")
 
 
@@ -191,7 +197,7 @@ def eval_model(args):
             qs = qs[8:] # remove <image>\n
 
             # generate output
-            outputs = inference_decode(image_file, qs)
+            outputs = inference_decode(image, qs)
             # print(f"AFTER: \n{outputs}")
 
 
