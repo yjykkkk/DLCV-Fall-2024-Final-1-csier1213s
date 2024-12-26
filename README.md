@@ -51,8 +51,14 @@ python3 download_dataset_image.py --split train
 ```
 the training images will be saved in "./dataset/train/images/"
 ## run training code
+To run `train.sh`, you must specify at least two GPU IDs. The IDs should ideally start from `0` and be consecutive. 
+```bash
+CUDA_VISIBLE_DEVICES=$1,$2 bash train.sh
 ```
-bash train.sh 
+$1, $2: specified gpu ids  
+For example:
+```bash
+CUDA_VISIBLE_DEVICES=0,1 bash train.sh
 ```
 the checkpoint will be saved in "./LLaVA/checkpoints/llava-v1.5-7b-task-lora/"
 
