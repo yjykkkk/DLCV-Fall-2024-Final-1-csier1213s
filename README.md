@@ -8,12 +8,10 @@ pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
 pip install datasets
 pip install gdown
-pip install -e ".[train]"
-pip install flash-attn --no-build-isolation
 cd ..
 ```
 ## download checkpoint
-```
+```bash
 cd LLaVA/
 mkdir checkpoints
 cd checkpoints/
@@ -28,6 +26,13 @@ bash inference.sh
 the predicted json file will be saved in "./output.json"
 
 # Train
+## environment setup
+```bash
+cd LLaVA
+pip install -e ".[train]"
+pip install flash-attn --no-build-isolation
+cd ..
+```
 ## download dataset
 ```
 mkdir dataset/train/images
