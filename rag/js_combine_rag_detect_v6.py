@@ -315,7 +315,7 @@ if __name__ == '__main__':
         # TODO: change the directory of detection info, all detection info file should be under the directory
         detect_dir='../detection_depth_info',
         # TODO: change the output path of this combined result
-        output_path=f'combined_prompt_v{args.v}_relfection_{args.q}_{args.r}_{args.d}.json',
+        output_path=f'../dataset/reflection/combined_prompt_v{args.v}_reflection_{args.q}_{args.r}_{args.d}.json',
         split=split,
         ques_type=args.q,
         detect_type=args.d,

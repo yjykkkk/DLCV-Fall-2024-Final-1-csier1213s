@@ -5,3 +5,5 @@ CODA-LM/
 *.ipynb
 .txt
 !few_shot/**/*.json
+rag/results/rag_all_cos.json
+dataset/reflection/combined_prompt_v9_reflection_all_cos_median.json
