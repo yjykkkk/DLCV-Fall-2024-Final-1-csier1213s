@@ -5,7 +5,7 @@ def results_to_text(original_input, key_split, key_type, example_1, example_2,
                        detect_info, detect_info_1 , detect_info_2,
                        general_result, previous_output):
     
-    if key_split == 'Train':
+    if key_split == 'Train' or key_split == 'Test':
         if key_type == 'general': # train general
             text = ( 
                 '<image>\n'
@@ -42,8 +42,13 @@ def results_to_text(original_input, key_split, key_type, example_1, example_2,
                 
                 '\nBefore analyzing the target image, '
                 'carefully study the following example driving suggestion. ' 
+                'About the structure of detection result, '
+                'each object is categorized with details including its bounding box [x1, y1, x2, y2] within the image size (width, height) = (1355, 720), '
+                'range (immediate, short_range, mid_range, long_range), and category/subcategory (e.g., vehicles: car, truck). '
+                'This helps understand the object\'s appearance, position, direction, and its impact on the ego car\'s behavior.'
         
                 '\nExample: '
+                f'\n- Detection Result: {detect_info_1}'
                 f'\n- Example Driving Suggestion: {example_1} '
                 
                 '\nThis example is provided solely to '
@@ -56,58 +61,15 @@ def results_to_text(original_input, key_split, key_type, example_1, example_2,
                 'detailed as the example provided, thoroughly addressing '
                 'all relevant factors.'
                 
-                'And the following is the general perception for the TARGET IMAGE, '
-                'which will help you understand the senario in the TARGET IMAGE, '
-                'including each object\'s appearance, position, direction, and its impact on the ego car\'s behavior.'
-                f'This will help you provide a driving suggestion for the image: '
-                f'\n- General Perception Result: {general_result}'
+                'And the following is the detection result for the TARGET IMAGE, '
+                f'which will help you provide a driving suggestion for the image: '
+                f'\n- Detection Result: {detect_info}'
                 f'\n- Driving Suggestion: '
             )
         else: # train regional
             text = (
                 '<image>\n'
                 'Task: Regional Perception' +
-                f'\n{original_input}'
-            )
-    elif key_split == 'Test':        
-        if key_type == 'general': # test general
-            text = ( 
-                '<image>\n'
-                'Task: General Perception' +
-                f'\n{original_input}'
-                '\nBefore analyzing the target image, '
-                'carefully study the following example detection result and its corresponding outputs. ' 
-                'About the structure of detection result, '
-                'each object is categorized with details including its bounding box [x1, y1, x2, y2] within the image size (width, height) = (1355, 720), '
-                'range (immediate, short_range, mid_range, long_range), and category/subcategory (e.g., vehicles: car, truck). '
-                'This helps describe the object\'s appearance, position, direction, and its impact on the ego car\'s behavior.'
-                        
-                '\nExample:'
-                f'\n- Detection Result: {detect_info_1}'
-                f'\n- Example Description: {example_1} '
-                
-                f'\nNow, it is your turn to provide a description of the TARGET IMAGE. ' 
-                'Focus entirely on the TARGET IMAGE and its specific conditions. '
-                'This example illustrates the expected level of detail and structure. ' 
-                'Your goal is to replicate this structure ' 
-                'by providing accurate object descriptions with a clear focus on appearance, position, direction, ' +
-                'and the impact each object has on the ego car\'s driving behavior, specifically noting the object\'s category. ' 
-                
-                'And the following is the detection result for the TARGET IMAGE, '
-                f'which will help you provide a description for the image: '
-                f'\n- Detection Result: {detect_info}'
-                f'\n- Description: '
-            )
-        elif key_type == 'suggestion': # test suggestion
-            text = (
-                '<image>\n'
-                'Task: Driving Suggestion'
-                f'\n{original_input}'
-            )   
-        else: # test regional
-            text = (
-                '<image>\n'
-                'Task: Regional Perception'
                 f'\n{original_input}'
             )
     else: # for self-reflection (val set)
@@ -143,12 +105,12 @@ def results_to_text(original_input, key_split, key_type, example_1, example_2,
                 f'\n- Original Task: {original_input}'
                 f'\n- Previous Output: {previous_output} '
                 
-                f'\nNow, it is your turn to provide a refined driving suggestion for the TARGET IMAGE. '
-                'The following is the general perception for the TARGET IMAGE, '
-                'which will help you understand the senario in the TARGET IMAGE, '
-                'including each object\'s appearance, position, direction, and its impact on the ego car\'s behavior.'
-                f'This will help you provide a driving suggestion for the image: '
-                f'\n- General Perception Result: {general_result}'
+                f'\nNow, it is your turn to provide a refined driving suggestion for the TARGET IMAGE. ' 
+                'The following is the detection result for the TARGET IMAGE, '
+                'each object is categorized with details including its bounding box [x1, y1, x2, y2] within the image size (width, height) = (1355, 720), '
+                'range (immediate, short_range, mid_range, long_range), and category/subcategory (e.g., vehicles: car, truck). '
+                'This will help you provide a refined driving suggestion for the image. '
+                f'\n- Detection Result: {detect_info}'
                 f'\n- Refined Driving Suggestion: '
             )
         else: # val regional
@@ -164,7 +126,6 @@ def results_to_text(original_input, key_split, key_type, example_1, example_2,
                 f'\nNow, it is your turn to provide a refined output for the TARGET IMAGE. '
                 f'\n- Refined Output:'
             )
-
 
     return text
 
