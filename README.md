@@ -7,6 +7,7 @@ conda activate llava
 pip install --upgrade pip  # enable PEP 660 support
 pip install -e .
 pip install datasets
+pip install gdown
 pip install -e ".[train]"
 pip install flash-attn --no-build-isolation
 cd ..
@@ -28,7 +29,11 @@ the predicted json file will be saved in "./output.json"
 
 # Train
 ## download dataset
-save training images in "./dataset/train/images"
+```
+mkdir dataset/train/images
+python3 download_dataset_image.py --split train
+```
+the training images will be saved in "./dataset/train/images/"
 ## run training code
 ```
 bash train.sh 
