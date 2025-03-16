@@ -1,3 +1,6 @@
+# final project of Deep Learning for Computer Vision 
+This is our implementation for ECCV 2024 challenge (Multimodal Perception and Comprehension of Corner Cases in Autonomous Driving).
+
 # Inference
 ## environment setup
 ```bash
